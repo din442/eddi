@@ -1,0 +1,1 @@
+[0m[[0m[33mwarn[0m] [0m[0minsecure HTTP request is deprecated 'http://conjars.org/repo'; switch to HTTPS or opt-in as ("Concurrent Maven Repo" at "http://conjars.org/repo").withAllowInsecureProtocol(true)[0m

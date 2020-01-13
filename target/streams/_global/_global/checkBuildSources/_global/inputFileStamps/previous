@@ -1,0 +1,1 @@
+["sbt.Task[scala.collection.Seq[scala.Tuple2[java.nio.file.Path, sbt.nio.FileStamp]]]",{"hashes":[["/home/adin/magpie/build.sbt","70e685a8dffeacf53e0fee4713936d237be259f4"],["/home/adin/magpie/project/plugins.sbt","9e5ad04b04e6a11882f9133e5a987137658d6c44"]],"lastModifiedTimes":[]}]
