@@ -1,4 +1,0 @@
-[warn] insecure HTTP request is deprecated 'http://conjars.org/repo'; switch to HTTPS or opt-in as ("Concurrent Maven Repo" at "http://conjars.org/repo").withAllowInsecureProtocol(true)
-[debug] "not up to date. inChanged = true, force = false
-[debug] Updating ProjectRef(uri("file:/home/adin/magpie/"), "magpie")...
-[debug] Done updating ProjectRef(uri("file:/home/adin/magpie/"), "magpie")
