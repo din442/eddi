@@ -1,6 +1,6 @@
-package com.jigsawstudio.utils
+package com.jigsawstudio.utils.database
 
-import java.sql.{Connection, DriverManager, ResultSet, Timestamp}
+import java.sql.{Connection, DriverManager, Timestamp}
 
 object JDBCConnection {
   def currentTimestamp = new Timestamp(System.currentTimeMillis)

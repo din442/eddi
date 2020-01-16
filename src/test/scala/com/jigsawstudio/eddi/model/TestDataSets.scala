@@ -1,30 +1,29 @@
-package com.jigsawstudio.magpie.model
+package com.jigsawstudio.eddi.model
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.scala.{DefaultScalaModule, ScalaObjectMapper}
+import com.jigsawstudio.eddi.model.DataSet
 import com.jigsawstudio.utils._
+import com.jigsawstudio.utils.database.{JDBCConnection, JDBCQuery}
 import org.scalatest.FunSuite
 import org.scalatest.matchers.must.Matchers
-import scalikejdbc.IsolationLevel.Default
+import scalikejdbc._
 
 import scala.util.{Failure, Success, Try}
 
 
 class TestDataSets extends FunSuite with Matchers {
   test("tables are created successfully") {
-    implicit val connection = JDBCConnection.getConnection(
-      "postgresql",
-      "127.0.0.1",
-      5432,
-      "data_catalog",
-      "jigsaw_app",
-      "jigsaw")
+    Class.forName("org.postgresql.Driver")
+    ConnectionPool.singleton("jdbc:postgresql://127.0.0.1:5432/data_catalog", "jigsaw_app", "jigsaw")
 
-    Try(Migration.createTables) match {
-      case Success(_) => "success"
-      case Failure(e) => println(e)
+      println("creating tablke")
+      // DataSet.createSql.execute().apply()
+    DB readOnly { implicit session =>
+      val d = DataSet.getByName("data_catalog.data_sets")
+      println(d)
     }
-    connection.close()
+ //
   }
 
   test("insert works successfully") {
@@ -72,19 +71,18 @@ where table_name = 'datasets';"""
 
     val defn = Map(
       "id" -> None,
-      "name" -> "data_catalog.data_sets",
+      "name" -> "datasets",
       "type" -> "db_table",
       "schema" -> om.writeValueAsString(schema),
       "path" -> "data_catalog.datasets",
       "isPartitioned" -> false,
       "owner" -> "uuid-adin",
       "version" -> 1,
-      "properties" -> "{}",
-      "createdAt" -> ctime,
-      "updatedAt" -> ctime
+      "properties" -> """{"database": "data_catalog"}""",
+      "created" -> ctime
     )
 
-    val b = CaseReflections.fromMap[DataSet](defn)
+    val b = CaseReflections.caseFromMap[DataSet](defn)
     println(defn)
     println(b)
     Try(b.insert(connection)) match {

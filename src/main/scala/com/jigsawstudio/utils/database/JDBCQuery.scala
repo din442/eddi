@@ -1,6 +1,8 @@
-package com.jigsawstudio.utils
+package com.jigsawstudio.utils.database
 
 import java.sql.{Connection, ResultSet}
+
+import com.jigsawstudio.utils.CaseReflections
 
 object JDBCQuery {
   def runQuery(query: String)(implicit connection: Connection): Unit = {
@@ -12,7 +14,7 @@ object JDBCQuery {
     rsRowMap(connection
       .createStatement
       .executeQuery(sql)
-    ).map { r => CaseReflections.fromMap[T](r) }
+    ).map { r => CaseReflections.caseFromMap[T](r) }
   }
 
   def queryResultsMap(sql: String)(implicit connection: Connection): List[Map[String, Any]] = {

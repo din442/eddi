@@ -1,4 +1,4 @@
-package com.jigsawstudio.magpie.model
+package com.jigsawstudio.eddi.model
 
 trait DataSetType {
   def dataSetTypes = List("db_table", "s3", "hdfs", "hive", "azure_blob")
